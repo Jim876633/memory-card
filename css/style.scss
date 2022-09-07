@@ -1,0 +1,121 @@
+$card-color: rgb(128, 127, 127);
+$img-color: rgb(250, 128, 52);
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    .title {
+        font-size: min(5rem, 15vw);
+        height: min(15vh, 5rem);
+        line-height: min(15vh, 5rem);
+        margin: 0.5rem;
+        text-transform: capitalize;
+    }
+    .score {
+        text-transform: capitalize;
+        position: absolute;
+        bottom: 1rem;
+        right: 2rem;
+        font-size: min(3rem, 8vw);
+        background: rgba(#aaa, 0.5);
+        padding: 0.5rem 1rem;
+        border-radius: 1rem;
+    }
+    .cards {
+        position: relative;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        align-content: flex-start;
+        flex-wrap: wrap;
+        width: 90%;
+        height: 70vh;
+        padding: 1rem;
+        overflow: auto;
+        .card {
+            width: min(28vh, 38%);
+            height: min(26vh, 12rem);
+            margin: 1rem 1rem;
+            position: relative;
+            perspective: 30rem;
+            transition: all 0.2s 0.4s;
+            .font,
+            .back {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                border-radius: 1rem;
+                background: $card-color;
+                backface-visibility: hidden;
+                transition: all 0.4s;
+                user-select: none;
+                padding: 1rem;
+            }
+            .font {
+                width: 100%;
+                height: 100%;
+                background-color: $img-color;
+                transform: rotateY(-180deg);
+            }
+            .back {
+                text-align: center;
+                padding: 3.8rem 0;
+                font-size: 3rem;
+            }
+            &.show .font {
+                transform: rotateY(0);
+            }
+            &.show .back {
+                transform: rotateY(180deg);
+            }
+            &.match {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    }
+    .reset {
+        border: none;
+        border-radius: 1rem;
+        margin-top: 1rem;
+        padding: 0.5rem 2rem;
+        font-size: min(2rem, 6vw);
+        background: $card-color;
+        color: #fff;
+        transition: all 0.2s;
+        &:hover {
+            cursor: pointer;
+            background: $img-color;
+        }
+    }
+    .alert {
+        position: absolute;
+        width: 100%;
+        height: 30vh;
+        line-height: 30vh;
+        text-align: center;
+        font-size: 2rem;
+        color: #fff;
+        background: rgba($card-color, 0.8);
+        top: 35vh;
+        left: -100%;
+        transition: all 0.5s;
+        &.show {
+            left: 0;
+        }
+    }
+}
